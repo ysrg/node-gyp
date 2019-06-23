@@ -2,6 +2,7 @@
 
 var test = require('tap').test
 var path = require('path')
+var devDir = require('./common').devDir()
 var gyp = require('../lib/node-gyp')
 var requireInject = require('require-inject')
 var configure = requireInject('../lib/configure', {
@@ -30,6 +31,7 @@ test('configure PYTHONPATH with no existing env', function (t) {
     t.equal(process.env.PYTHONPATH, EXPECTED_PYPATH)
     return SPAWN_RESULT
   }
+  prog.devDir = devDir
   configure(prog, [], t.fail)
 })
 
@@ -42,7 +44,6 @@ test('configure PYTHONPATH with existing env of one dir', function (t) {
   var prog = gyp()
   prog.parseArgv([])
   prog.spawn = function () {
-
     t.equal(process.env.PYTHONPATH, [EXPECTED_PYPATH, existingPath].join(SEPARATOR))
 
     var dirs = process.env.PYTHONPATH.split(SEPARATOR)
@@ -50,6 +51,7 @@ test('configure PYTHONPATH with existing env of one dir', function (t) {
 
     return SPAWN_RESULT
   }
+  prog.devDir = devDir
   configure(prog, [], t.fail)
 })
 
@@ -64,7 +66,6 @@ test('configure PYTHONPATH with existing env of multiple dirs', function (t) {
   var prog = gyp()
   prog.parseArgv([])
   prog.spawn = function () {
-
     t.equal(process.env.PYTHONPATH, [EXPECTED_PYPATH, existingPath].join(SEPARATOR))
 
     var dirs = process.env.PYTHONPATH.split(SEPARATOR)
@@ -72,5 +73,6 @@ test('configure PYTHONPATH with existing env of multiple dirs', function (t) {
 
     return SPAWN_RESULT
   }
+  prog.devDir = devDir
   configure(prog, [], t.fail)
 })
