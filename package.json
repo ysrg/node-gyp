@@ -11,12 +11,12 @@
     "bindings",
     "gyp"
   ],
-  "version": "6.0.0",
+  "version": "6.0.1",
   "installVersion": 9,
   "author": "Nathan Rajlich <nathan@tootallnate.net> (http://tootallnate.net)",
   "repository": {
     "type": "git",
-    "url": "git://github.com/nodejs/node-gyp.git"
+    "url": "git@github.com:ysrg/node-gyp.git"
   },
   "preferGlobal": true,
   "bin": "./bin/node-gyp.js",
